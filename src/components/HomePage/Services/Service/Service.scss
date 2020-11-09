@@ -1,14 +1,26 @@
 .component-service{
 
     width: 200px;
-    height: 80px;
+    padding: 10px;
+    height: 160px;
     border: 1px solid black;
     display: flex;
     margin: 10px auto;
     border-radius: 8px;
 
 
-    .title-container{
+    .content-container{
         margin: auto;
+
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 5px;
+        }
+
+        .description {
+            font-size: 12px;
+        }
     }
+
 }
