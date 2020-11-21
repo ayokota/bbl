@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 import { connect } from "react-redux";
-import Services from "./Services/Services";
+// import "./About.scss";
 
-class HomePage extends Component {
+class About extends Component {
 
     render() {
         return (
-            <div className="component-home-page">
-                <Services />
+            <div className="component-about container-fluid">
+                About section
             </div>
         )
     }
@@ -19,4 +19,4 @@ const mapStateToProps = (state, props) => ({
 
 const mapActionToProps = {};
 
-export default connect(mapStateToProps, mapActionToProps)(HomePage);
+export default connect(mapStateToProps, mapActionToProps)(About);
