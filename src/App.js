@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Banner from "./components/Banner/Banner";
+import Team from "./components/Team/Team";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path={"/"} exact component={HomePage} />
             <Route path={"/about"} exact component={About} />
             <Route path={"/contact"} exact component={Contact} />
+            <Route path={"/team"} exact component={Team} />
             <Footer />
           </div>
         </Router>

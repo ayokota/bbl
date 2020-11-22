@@ -19,13 +19,18 @@ class Footer extends Component {
                             </Link>
                         </div>
                         <div class="col-6 col-md">
-                            <Link to="/contact">
-                                <h5>Contact</h5>
+                            <Link to="/team">
+                                <h5>Team</h5>
                             </Link>
                         </div>
                         <div class="col-6 col-md">
                             <Link to="/about">
                                 <h5>About Us</h5>
+                            </Link>
+                        </div>
+                        <div class="col-6 col-md">
+                            <Link to="/contact">
+                                <h5>Contact</h5>
                             </Link>
                         </div>
                     </div>

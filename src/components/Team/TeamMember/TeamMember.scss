@@ -1,9 +1,13 @@
 .component-contact-card{
-    width: 200px;
+    width: 280px;
     height: 330px;
     border: 1px solid black;
     border-radius: 5px;
     margin: 20px 20px;
+
+    li {
+        list-style-type: none; /* Remove bullets */
+    }
 
     .headshot{
         margin: 10px auto;
