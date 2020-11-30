@@ -10,7 +10,7 @@ class Contact extends Component {
     render() {
         return (
             <div className="component-contact container-fluid">
-                You may reach us through
+                <b>You may reach us through:</b>
                 <ul>
                     <li>admin@bolsternetwork.org</li>
                     <li >

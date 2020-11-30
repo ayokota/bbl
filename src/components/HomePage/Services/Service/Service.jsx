@@ -8,6 +8,9 @@ class Services extends Component {
         return (
             <div className="component-service container-fluid">
                 <div className="content-container">
+                    {this.props.ready === false? 
+                    <div className="coming-soon">Coming soon...</div>
+                    : null}
                     <div className="title">
                         {this.props.title}
                     </div>

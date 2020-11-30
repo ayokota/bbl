@@ -2,7 +2,7 @@
 
     width: 200px;
     padding: 10px;
-    height: 160px;
+    height: 190px;
     border: 1px solid black;
     display: flex;
     margin: 10px auto;
@@ -12,6 +12,11 @@
     .content-container{
         margin: auto;
 
+        .coming-soon{
+            background: black;
+            color: white;
+            font-weight: bold;
+        }
         .title {
             font-size: 18px;
             font-weight: bold;

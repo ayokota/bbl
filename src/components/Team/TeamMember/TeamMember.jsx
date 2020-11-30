@@ -33,7 +33,10 @@ class Contact extends Component {
                     <li><TwitterLogo className="social-media" url={this.props.twitter}/></li>}
                     {this.props.instagram === undefined ? null :
                     <li><InstagramLogo className="social-media" url={this.props.instagram}/></li>}
+                    {this.props.bio === undefined ? null:
+                    <p>{this.props.bio}</p>}
                 </ul>
+
             </div>
         )
     }

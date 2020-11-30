@@ -1,0 +1,27 @@
+.component-about{
+    // display: flex;
+    .who-we-are {
+        padding-top: 20px;
+        width: 400px;
+        margin: auto;
+        .title{
+            font-weight: bold;
+            font-size: 28px;
+        }
+    }
+
+    .origin-story{
+        padding-top: 40px;
+
+        width: 400px;
+        margin: auto;
+        .title{
+            font-weight: bold;
+            font-size: 28px;
+        }
+
+        .story{
+
+        }
+    }
+}

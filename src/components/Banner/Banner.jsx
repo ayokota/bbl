@@ -1,13 +1,16 @@
 import React, { Component } from "react"
 import { connect } from "react-redux";
 import "./Banner.scss";
+import {ReactComponent as LogoSvg} from "../../svgs/brand/logo.svg";
+
 
 class HomePage extends Component {
 
     render() {
         return (
             <div className="component-banner container-fluid">
-                <div>Coming Soon... </div>
+                <LogoSvg className="logo"/>
+                <div className="title">olster </div>
             </div>
         )
     }

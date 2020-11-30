@@ -4,4 +4,17 @@
     font-size: 36px;
     text-align: center;
     padding: 10px;
+
+    .logo{
+        $side: 50px;
+        height: $side;
+        width: $side;
+        // margin: 0px 5px;
+        border-radius: 50px;
+        display: inline-block;
+    }
+    
+    .title{
+        display: inline-block;
+    }
 }
