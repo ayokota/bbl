@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import HomePage from "./components/HomePage/HomePage";
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import Footer from "./components/Footer/Footer";
@@ -13,10 +13,12 @@ function App() {
         <Router>
           <div>
             <Banner />
-            <Route path={"/"} exact component={HomePage} />
-            <Route path={"/about"} exact component={About} />
-            <Route path={"/contact"} exact component={Contact} />
-            <Route path={"/team"} exact component={Team} />
+            <div className="body">
+              <Route path={"/"} exact component={HomePage} />
+              <Route path={"/about"} exact component={About} />
+              <Route path={"/contact"} exact component={Contact} />
+              <Route path={"/team"} exact component={Team} />
+            </div>
             <Footer />
           </div>
         </Router>
