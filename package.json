@@ -26,6 +26,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "shutdown" : "sudo kill -9 `sudo lsof -t -i:4000`",
+    "restart": "npm run shutdown && git fetch && git pull origin master && npm install && npm run build && npm run serve",
     "serve": "nohup serve -l 4000 -s build &"
   },
   "eslintConfig": {
