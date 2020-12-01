@@ -20,10 +20,10 @@ class Contact extends Component {
                     <TeamMember 
                         profilePicUrl="https://media-exp1.licdn.com/dms/image/C5603AQHsV6D8xFWj7Q/profile-displayphoto-shrink_400_400/0?e=1611792000&v=beta&t=YbcG-s0MX9kEsi65oe5YPlLyQbTFWLLSn-HCAxpvvT0"
                         name="Akiyo Yokota" 
-                        position="Software Engineer" 
+                        position="CTO" 
                         email="akiyo.yokota@gmail.com"
                         linkedin="https://www.linkedin.com/in/akiyoyokota/"
-                        bio="Akiyo is the first and only Software Developer for this Org. He will be the CTO until an actual CTO joins the org."
+                        bio="The one and only..."
                     />
                 </div>
             </div>
