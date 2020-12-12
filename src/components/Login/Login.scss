@@ -1,0 +1,24 @@
+.component-login{
+    margin-top: 50px;
+    display: flex;
+
+    .user-pw-section{
+        margin: auto;
+
+        .label{
+            display: inline-block;
+            width: 100px;
+            // border: 1px solid blue;
+            font-weight: bold;
+        }
+
+        .login-input{
+            margin-bottom: 10px;
+        }
+
+        .submit-container{
+            text-align: center;
+        }
+
+    }
+}
