@@ -1,4 +1,6 @@
 import './App.scss';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 import HomePage from "./components/HomePage/HomePage";
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import { Redirect } from "react-router-dom";
@@ -9,30 +11,49 @@ import Banner from "./components/Banner/Banner";
 import Team from "./components/Team/Team";
 import Login from "./components/Login/Login";
 import * as LoginService from "./services/LoginService.js";
+import * as authAction from "./redux/action/auth-action.js";
 
-function App() {
-  let authenticated = LoginService.isLoggedIn();
+class App extends Component {
 
-  return (
-    <div>
-        <Router>
-          <div>
-            <Banner />
-            <div className="body">
-              <Route path={"/"} exact component={HomePage} />
-              <Route path={"/about"} exact component={About} />
-              <Route path={"/contact"} exact component={Contact} />
-              <Route path={"/team"} exact component={Team} />
-              <Route path={"/login"} exact component={Login} />
-              {
-                authenticated === false ? <Redirect to={"/login"} /> : null
-              }
+
+  componentDidMount() {
+    // this.setState({authenticated: LoginService.isLoggedIn()});
+    this.props.checkAuthentication();
+  }
+
+  render() {
+    console.log(this.props.authenticated);
+    return (
+      <div>
+          <Router>
+            <div>
+              <Banner />
+              <div className="body">
+                <Route path={"/"} exact component={HomePage} />
+                <Route path={"/about"} exact component={About} />
+                <Route path={"/contact"} exact component={Contact} />
+                <Route path={"/team"} exact component={Team} />
+                <Route path={"/login"} exact component={Login} />
+                {
+                  this.props.authenticated === false ? <Redirect to={"/login"} /> : null
+                }
+              </div>
+              <Footer />
             </div>
-            <Footer />
-          </div>
-        </Router>
-    </div>
-  );
+          </Router>
+      </div>
+    );
+  }
+
 }
 
-export default App;
+const mapStateToProps = (state, props) => ({
+    authenticated: state.authState.authenticated
+});
+
+const mapActionToProps = {
+  checkAuthentication: authAction.checkAuthentication,
+};
+
+
+export default connect(mapStateToProps, mapActionToProps)(App);

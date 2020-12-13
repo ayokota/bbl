@@ -3,12 +3,13 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "./Login.scss";
 import * as LoginService from "../../services/LoginService.js";
+import * as authAction from "../../redux/action/auth-action.js";
 
 class Login extends Component {
     
     login() {
         LoginService.login();
-        this.forceUpdate()
+        this.props.checkAuthentication();
     }
 
     render() {
@@ -42,6 +43,8 @@ const mapStateToProps = (state, props) => ({
 
 });
 
-const mapActionToProps = {};
+const mapActionToProps = {
+    checkAuthentication: authAction.checkAuthentication,
+};
 
 export default connect(mapStateToProps, mapActionToProps)(Login);
