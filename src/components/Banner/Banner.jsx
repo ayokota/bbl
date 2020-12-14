@@ -14,7 +14,7 @@ class HomePage extends Component {
     }
 
     render() {
-        console.log(this.props.authenticated);
+
         return (
             <div className="component-banner container-fluid">
                 <LogoSvg className="logo"/>

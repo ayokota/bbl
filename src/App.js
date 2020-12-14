@@ -18,11 +18,12 @@ class App extends Component {
 
   componentDidMount() {
     // this.setState({authenticated: LoginService.isLoggedIn()});
-    this.props.setAuthenticationStatus(LoginService.isLoggedIn());
+    // this.props.setAuthenticationStatus(LoginService.isLoggedIn());
+    this.props.authenticate();
   }
 
   render() {
-    console.log(this.props.authenticated);
+
     return (
       <div>
           <Router>
@@ -53,6 +54,7 @@ const mapStateToProps = (state, props) => ({
 
 const mapActionToProps = {
   setAuthenticationStatus: authAction.setAuthenticationStatus,
+  authenticate : authAction.authenticate,
 };
 
 
