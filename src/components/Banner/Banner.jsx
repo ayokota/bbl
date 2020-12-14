@@ -10,7 +10,7 @@ class HomePage extends Component {
 
     logout() {
         LoginService.logout();
-        this.props.checkAuthentication();
+        this.props.setAuthenticationStatus(false);
     }
 
     render() {
@@ -34,7 +34,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapActionToProps = {
-    checkAuthentication: authAction.checkAuthentication,
+    setAuthenticationStatus: authAction.setAuthenticationStatus,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(HomePage);

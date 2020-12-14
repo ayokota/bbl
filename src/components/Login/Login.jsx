@@ -9,7 +9,9 @@ class Login extends Component {
     
     login() {
         LoginService.login();
-        this.props.checkAuthentication();
+        if(LoginService.isLoggedIn()) {
+            this.props.setAuthenticationStatus(true);
+        }
     }
 
     render() {
@@ -44,7 +46,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapActionToProps = {
-    checkAuthentication: authAction.checkAuthentication,
+    setAuthenticationStatus: authAction.setAuthenticationStatus,
 };
 
 export default connect(mapStateToProps, mapActionToProps)(Login);

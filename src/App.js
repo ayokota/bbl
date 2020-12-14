@@ -18,7 +18,7 @@ class App extends Component {
 
   componentDidMount() {
     // this.setState({authenticated: LoginService.isLoggedIn()});
-    this.props.checkAuthentication();
+    this.props.setAuthenticationStatus(LoginService.isLoggedIn());
   }
 
   render() {
@@ -52,7 +52,7 @@ const mapStateToProps = (state, props) => ({
 });
 
 const mapActionToProps = {
-  checkAuthentication: authAction.checkAuthentication,
+  setAuthenticationStatus: authAction.setAuthenticationStatus,
 };
 
 

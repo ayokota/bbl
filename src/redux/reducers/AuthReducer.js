@@ -8,8 +8,8 @@ const authState = {
 
 export default function authReducer(state = authState, action) {
     switch(action.type) {
-        case authActionTypes.CHECK_AUTHENTICATE:
-            return {...state, authenticated: loginService.isLoggedIn()}
+        case authActionTypes.SET_AUTHENTICATION_STATUS:
+            return {...state, authenticated: action.payload}
         default:
             return state;
     }
