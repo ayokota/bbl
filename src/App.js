@@ -15,15 +15,11 @@ import * as authAction from "./redux/action/auth-action.js";
 
 class App extends Component {
 
-
   componentDidMount() {
-    // this.setState({authenticated: LoginService.isLoggedIn()});
-    // this.props.setAuthenticationStatus(LoginService.isLoggedIn());
     this.props.authenticate();
   }
 
   render() {
-
     return (
       <div>
           <Router>
@@ -35,9 +31,6 @@ class App extends Component {
                 <Route path={"/contact"} exact component={Contact} />
                 <Route path={"/team"} exact component={Team} />
                 <Route path={"/login"} exact component={Login} />
-                {
-                  this.props.authenticated === false ? <Redirect to={"/login"} /> : null
-                }
               </div>
               <Footer />
             </div>

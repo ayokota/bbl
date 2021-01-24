@@ -15,10 +15,10 @@ class Login extends Component {
     }
 
     render() {
-        let authenticated = LoginService.isLoggedIn();
-
-        if(authenticated === true) {
-            return <Redirect to={"/"} />
+        if(this.props.authenticated === true) {
+            return (
+                <Redirect to={"/"} />
+            )
         }
 
         return (
@@ -42,7 +42,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-
+    authenticated: state.authState.authenticated
 });
 
 const mapActionToProps = {
