@@ -36,6 +36,12 @@ app.post('/login', (req, res) => {
 
 })
 
+app.get('/ping', (req, res) => {
+    res.send("OK")
+
+})
+
+
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
