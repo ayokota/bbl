@@ -6,7 +6,7 @@ export function authenticate({username, password}) {
             'Access-Control-Allow-Origin': '*',
           },
         method: 'post',
-        url: 'http://localhost:3001/login',
+        url: 'http://ec2-3-140-249-109.us-east-2.compute.amazonaws.com:3001/login',
         data: {
             "username": username,
             "password": password
