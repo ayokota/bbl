@@ -2,7 +2,7 @@ import './App.scss';
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import HomePage from "./components/HomePage/HomePage";
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import About from "./components/About/About";
@@ -16,25 +16,27 @@ import * as authAction from "./redux/action/auth-action.js";
 class App extends Component {
 
   componentDidMount() {
-    this.props.authenticate();
+    if (LoginService.isLoggedIn()) {
+      this.props.setAuthenticationStatus(true);
+    }
   }
 
   render() {
     return (
       <div>
-          <Router>
-            <div>
-              <Banner />
-              <div className="body">
-                <Route path={"/"} exact component={HomePage} />
-                <Route path={"/about"} exact component={About} />
-                <Route path={"/contact"} exact component={Contact} />
-                <Route path={"/team"} exact component={Team} />
-                <Route path={"/login"} exact component={Login} />
-              </div>
-              <Footer />
+        <Router>
+          <div>
+            <Banner />
+            <div className="body">
+              <Route path={"/"} exact component={HomePage} />
+              <Route path={"/about"} exact component={About} />
+              <Route path={"/contact"} exact component={Contact} />
+              <Route path={"/team"} exact component={Team} />
+              <Route path={"/login"} exact component={Login} />
             </div>
-          </Router>
+            <Footer />
+          </div>
+        </Router>
       </div>
     );
   }
@@ -42,12 +44,12 @@ class App extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    authenticated: state.authState.authenticated
+  authenticated: state.authState.authenticated
 });
 
 const mapActionToProps = {
   setAuthenticationStatus: authAction.setAuthenticationStatus,
-  authenticate : authAction.authenticate,
+  authenticate: authAction.authenticate,
 };
 
 
