@@ -18,6 +18,7 @@ function* authenticate(action) {
             yield put({type: authActionTypes.SET_AUTHENTICATION_STATUS, payload: true});
         }
     } catch (e) {
+        alert(e);
         console.error(e);
     }
 }
