@@ -1,9 +1,18 @@
 const express = require('express')
 const bodyParser = require("body-parser");
 const UserDao = require('./dao/UserDao.js')
+var cors = require('cors')
 
 const app = express()
 const port = 3001
+
+
+var corsOptions = {
+    origin: '*',
+    optionsSuccessStatus: 200 // For legacy browser support
+}
+
+app.use(cors(corsOptions));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
