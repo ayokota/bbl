@@ -20,20 +20,50 @@ app.use(bodyParser.json());
 app.post('/login', (req, res) => {
     let body = req.body;
 
-    UserDao.createBaseAccount({username: body.username, password: body.password},
-        function(err, result) {
-            if(err == null)
-                res.send(result[0][0])
-            else 
-                res.send(err)
-        })
-    // if(body.username === "manfield" && body.password === "manfield") {
-    //     res.send('credToken')
-    // } else {
-    //     res.send(401);
-    // }
+    try {
+        UserDao.authenticate({username: body.username, password: body.password},
+            function(err, result) {
+                if(err == null)
+                    res.send(result[0][0])
+                else  {
+                    res.status(500)
+                    .send(err)
+                }
+            })
+    } catch(err) {
+        res.status(500)
+            .send(err)
+    }
+})
 
+app.post('/signup', (req, res) => {
+    let body = req.body;
 
+    try {
+        let email = body.username
+        let password = body.password
+        let firstname = body.firstname
+        let lastname = body.lastname
+
+        UserDao.signup(
+            {
+                username: body.username, 
+                password: body.password,
+                firstname: firstname,
+                lastname: lastname
+            },
+            function(err, result) {
+                if(err == null)
+                    res.send(result[0][0])
+                else  {
+                    res.status(500)
+                    .send(err)
+                }
+            })
+    } catch(err) {
+        res.status(500)
+            .send(err)
+    }
 })
 
 app.get('/ping', (req, res) => {
