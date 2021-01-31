@@ -7,3 +7,7 @@ export function setAuthenticationStatus(payload) {
 export function authenticate(payload) {
     return {type: authActionTypes.AUTHENTICATE, payload}
 }
+
+export function signup(payload) {
+    return {type: authActionTypes.SIGNUP, payload}
+}

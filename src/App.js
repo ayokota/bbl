@@ -10,6 +10,7 @@ import Contact from "./components/Contact/Contact";
 import Banner from "./components/Banner/Banner";
 import Team from "./components/Team/Team";
 import Login from "./components/Login/Login";
+import Signup from "./components/Signup/Signup";
 import * as LoginService from "./services/LoginService.js";
 import * as authAction from "./redux/action/auth-action.js";
 
@@ -33,6 +34,7 @@ class App extends Component {
               <Route path={"/contact"} exact component={Contact} />
               <Route path={"/team"} exact component={Team} />
               <Route path={"/login"} exact component={Login} />
+              <Route path={"/signup"} exact component={Signup} />
             </div>
             <Footer />
           </div>

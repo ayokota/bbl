@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import "./Login.scss";
 import * as LoginService from "../../services/LoginService.js";
 import * as authAction from "../../redux/action/auth-action.js";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 
 class Login extends Component {
     constructor(props) {
@@ -45,11 +46,16 @@ class Login extends Component {
                             onChange={(e) => this.setState({password : e.target.value})}/>
                     </div>
                     <div className="submit-container login-input">
-                        <button onClick={() => 
+                        <button className="button" onClick={() => 
                             this.props.authenticate({username: this.state.username, password: this.state.password})}
                         >
                             Submit
                         </button>
+                        <Link to="/signup">
+                            <button className="button">
+                                Sign up
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

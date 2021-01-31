@@ -7,6 +7,8 @@ import * as LoginService from "../../services/LoginService.js"
 
 export default function* authSaga() {
     yield takeEvery(authActionTypes.AUTHENTICATE, authenticate);
+    yield takeEvery(authActionTypes.SIGNUP, signup);
+
 }
 
 function* authenticate(action) {
@@ -16,6 +18,19 @@ function* authenticate(action) {
         if(res.data.authenticated == 1) {
             LoginService.login();
             yield put({type: authActionTypes.SET_AUTHENTICATION_STATUS, payload: true});
+        }
+    } catch (e) {
+        alert(e);
+        console.error(e);
+    }
+}
+
+function* signup(action) {
+    try {
+        let res = yield call(() => AuthApis.signup(action.payload))
+
+        if(res.data.exists == 1) {
+            alert("User already exists!")
         }
     } catch (e) {
         alert(e);
