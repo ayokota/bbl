@@ -9,6 +9,7 @@ CREATE TABLE `users` (
    `fname` VARCHAR(20) NULL,
  `lname` VARCHAR(20)  NULL,
   `token` VARCHAR(36) NULL,
+  `verification` VARCHAR(36) NULL,
   PRIMARY KEY (`id`, `email`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
@@ -33,7 +34,7 @@ END$$
 DELIMITER ;
   
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `user_signup`(IN _username CHAR(60), IN _password varchar(20), IN _fname varchar(20), IN _lname varchar(20))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `user_signup`(IN _username CHAR(60), IN _password varchar(20), IN _fname varchar(20), IN _lname varchar(20), IN _verification varchar(6))
 BEGIN
 	-- check if user exists 
 	set @user_exists = exists (
@@ -47,9 +48,28 @@ BEGIN
 		select false as 'created' ,  true as 'exists';
 	else 
 		-- insert record into user table
-        insert into users (email, password, fname, lname) values (_username, _password, fname, lname);
+        insert into users (email, password, fname, lname, verification) values (_username, _password, _fname, _lname, _verification);
 		select true as 'created' ,  false as 'exists';
    end if;
 
 END$$
+DELIMITER ;
+
+DELIMITER $$
+USE `bbl`$$
+CREATE PROCEDURE `email_verification` (IN _username CHAR(60), IN _verification varchar(6))
+BEGIN
+	set @authenticated = exists (
+		SELECT *
+		FROM users u
+        WHERE u.email = _username and u.verification = _verification
+	);
+    
+	if  @authenticated=1 then
+		select true as 'exists';
+	else 
+		select false as  'exists';
+   end if;
+END$$
+
 DELIMITER ;

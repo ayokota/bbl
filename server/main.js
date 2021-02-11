@@ -1,6 +1,8 @@
 const express = require('express')
 const bodyParser = require("body-parser");
-const UserDao = require('./dao/UserDao.js')
+const UserDao = require('./dao/UserDao.js');
+const randomUtils = require('./utility/randomUtils.js');
+
 var cors = require('cors')
 
 const app = express()
@@ -40,17 +42,45 @@ app.post('/signup', (req, res) => {
     let body = req.body;
 
     try {
-        let email = body.username
+        let username = body.username
         let password = body.password
         let firstname = body.firstname
         let lastname = body.lastname
+        let verification = randomUtils.generateVerificationCode()
 
         UserDao.signup(
             {
-                username: body.username, 
-                password: body.password,
+                username: username, 
+                password: password,
                 firstname: firstname,
-                lastname: lastname
+                lastname: lastname,
+                verification: verification
+            },
+            function(err, result) {
+                if(err == null)
+                    res.send(result[0][0])
+                else  {
+                    res.status(500)
+                    .send(err)
+                }
+            })
+    } catch(err) {
+        res.status(500)
+            .send(err)
+    }
+})
+
+app.post('/verifyEmail', (req, res) => {
+    let body = req.body;
+
+    try {
+        let username = body.username
+        let verificationCode = body.verificationCode
+
+        UserDao.verifyEmail(
+            {
+                username: username,
+                verificationCode: verificationCode
             },
             function(err, result) {
                 if(err == null)

@@ -1,16 +1,14 @@
-// import moment from 'moment'
-// var moment = require('moment');
-var mysql = require('mysql');
 
-// //can be pre-loaded
-// require('dotenv').config()
+var mysql = require('mysql');
+require('dotenv').config();
+
 
 var connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database:'bbl',
-  port:3306
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PW,
+  database: process.env.DB_DB,
+  port: process.env.DB_PORT
 });
 
 // var con = mysql.createConnection({
