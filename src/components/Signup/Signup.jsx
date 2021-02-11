@@ -15,7 +15,9 @@ class Signup extends Component {
             password: "",
             firstname: "",
             lastname: "",
-            success: false
+            verificationCode: "",
+            success: false,
+            verified: false
         }
     }
 
@@ -76,6 +78,25 @@ class Signup extends Component {
                     <button>Return to login</button>
                 </Link>
             </div>
+        )
+    }
+
+    renderVerification() {
+        return (
+            <div className="email-verification">
+                <p>An email has been sent to you, please check your email for the verification code</p>
+                <p>Verification Code</p>
+                <input className="verification-input" value={this.state.verificationCode}
+                        onChange={(e) => this.setState({ verificationCode: e.target.value })} />                
+                <div className="button-group">
+                    <button onClick={() => {
+                        AuthApi.resendVerificationCode(this.state.username);
+                        alert("Verification code has been sent to your email!")
+                    }}>Resend</button>
+                    <button onClick={() => { this.verifyEmail() }} >Submit</button>
+                </div>
+            </div>
+
         )
     }
 
@@ -140,10 +161,33 @@ class Signup extends Component {
                 {this.state.success === false ?
                     this.renderForm() 
                     :
-                    this.renderSucceess()
+                    this.state.verified === false ?
+                        this.renderVerification()
+                        :
+                        this.renderSucceess()
                 }
             </div>
         )
+    }
+
+    verifyEmail() {
+        let self = this;
+        AuthApi.verification({
+            username: this.state.username,
+            verificationCode: this.state.verificationCode
+        }).then(function (response) {
+            // handle success
+            if(response.data !== undefined && response.data.exists === 1) {
+                self.setState({verified: true})
+            } else {
+                alert("Incorrect verification code...")
+            }
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+            alert(error)
+          })
     }
 }
 
