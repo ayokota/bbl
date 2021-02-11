@@ -49,7 +49,7 @@ class Login extends Component {
                         <button className="button" onClick={() => 
                             this.props.authenticate({username: this.state.username, password: this.state.password})}
                         >
-                            Submit
+                            Login
                         </button>
                         <Link to="/signup">
                             <button className="button">

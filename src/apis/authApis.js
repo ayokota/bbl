@@ -1,4 +1,5 @@
 import axios from 'axios';
+require('dotenv').config();
 
 export function authenticate({username, password}) {
     return axios.request({
@@ -6,7 +7,7 @@ export function authenticate({username, password}) {
             'Access-Control-Allow-Origin': '*',
           },
         method: 'post',
-        url: 'http://ec2-3-140-249-109.us-east-2.compute.amazonaws.com:3001/login',
+        url: process.env.REACT_APP_URL_AUTHENTICATE,
         data: {
             "username": username,
             "password": password
@@ -20,12 +21,37 @@ export function signup({username, password, firstname, lastname}) {
             'Access-Control-Allow-Origin': '*',
           },
         method: 'post',
-        url: 'http://ec2-3-140-249-109.us-east-2.compute.amazonaws.com:3001/signup',
+        url: process.env.REACT_APP_URL_SIGNUP,
         data: {
             "username": username,
             "password": password,
             "firstname" : firstname,
             "lastname" : lastname
         }
+    })
+}
+
+
+export function verification({username, verificationCode}) {
+    return axios.request({
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+        method: 'post',
+        url: process.env.REACT_APP_URL_VERIFICATION,
+        data: {
+            "username": username,
+            "verificationCode": verificationCode
+        }
+    })
+}
+
+export function resendVerificationCode(username) {
+    return axios.request({
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+        method: 'get',
+        url: process.env.REACT_APP_URL_RESEND_VERIFICATION_CODE+username,
     })
 }
