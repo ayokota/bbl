@@ -1,7 +1,8 @@
 const express = require('express')
 const bodyParser = require("body-parser");
 const UserDao = require('./dao/UserDao.js');
-const randomUtils = require('./utility/randomUtils.js');
+const randomUtils = require('./utility/RandomUtils.js');
+const emailService = require('./service/EmailService.js');
 
 var cors = require('cors')
 
@@ -42,7 +43,7 @@ app.post('/signup', (req, res) => {
     let body = req.body;
 
     try {
-        let username = body.username
+        let email = body.username
         let password = body.password
         let firstname = body.firstname
         let lastname = body.lastname
@@ -50,15 +51,17 @@ app.post('/signup', (req, res) => {
 
         UserDao.signup(
             {
-                username: username, 
+                username: email, 
                 password: password,
                 firstname: firstname,
                 lastname: lastname,
                 verification: verification
             },
             function(err, result) {
-                if(err == null)
+                if(err == null) {
+                    emailService.sendVerificationCode(email, verification);
                     res.send(result[0][0])
+                }
                 else  {
                     res.status(500)
                     .send(err)
