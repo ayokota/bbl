@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import * as LoginService from "../../services/LoginService.js";
 import * as authAction from "../../redux/action/auth-action.js";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import * as AuthApi from "../../apis/authApis";
 import "./Signup.scss"
 
 class Signup extends Component {
@@ -43,13 +44,28 @@ class Signup extends Component {
             return
         }
 
-        this.props.signup({
+        let self = this;
+        AuthApi.signup({
             username: this.state.username,
             password: this.state.password,
             firstname: this.state.firstname,
             lastname : this.state.lastname
-        })
-        this.setState({success : true})
+        }).then(function (response) {
+            // handle success
+            let resBody = response.data;
+            console.log(resBody);
+            if(resBody.exists === 1) {
+                alert("User already exists");
+            } else if(resBody.created === 1) {
+                self.setState({success : true})
+            }
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+            alert(error)
+          })
+       
     }
 
     renderSucceess() {
