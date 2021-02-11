@@ -99,6 +99,37 @@ app.post('/verifyEmail', (req, res) => {
     }
 })
 
+app.get('/resendVerificationCode/:email', (req, res) => {
+    let params = req.params;
+
+    try {
+        UserDao.query(`SELECT verification FROM users u WHERE u.email = '${params.email}'`, function(err, result) { 
+            if(err == null) {
+
+                let verificationCode = result[0].verification
+                if(verificationCode !== '') {
+                    emailService.sendVerificationCode(params.email, verificationCode);
+                    res.send({
+                        verified: false,
+                        code: verificationCode
+                    })
+                } else {
+                    res.send({
+                        verified: true
+                    })
+                }
+            }
+            else  {
+                res.status(500)
+                .send(err)
+            }
+        })
+    } catch(err) {
+        res.status(500)
+            .send(err)
+    }
+})
+
 app.get('/ping', (req, res) => {
     res.send("OK")
 
@@ -106,5 +137,5 @@ app.get('/ping', (req, res) => {
 
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+  console.log(`BBL server app listening at http://localhost:${port}`)
 })

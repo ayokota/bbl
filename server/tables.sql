@@ -16,7 +16,7 @@ CREATE TABLE `users` (
   
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `authenticate`(IN _username CHAR(60), IN _password varchar(20))
+CREATE PROCEDURE `authenticate`(IN _username CHAR(60), IN _password varchar(20))
 BEGIN
 	set @authenticated = exists (
 		SELECT *
@@ -34,7 +34,7 @@ END$$
 DELIMITER ;
   
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `user_signup`(IN _username CHAR(60), IN _password varchar(20), IN _fname varchar(20), IN _lname varchar(20), IN _verification varchar(6))
+CREATE PROCEDURE `user_signup`(IN _username CHAR(60), IN _password varchar(20), IN _fname varchar(20), IN _lname varchar(20), IN _verification varchar(6))
 BEGIN
 	-- check if user exists 
 	set @user_exists = exists (
@@ -66,6 +66,7 @@ BEGIN
 	);
     
 	if  @authenticated=1 then
+		update users set verification = '' where email = _username;
 		select true as 'exists';
 	else 
 		select false as  'exists';

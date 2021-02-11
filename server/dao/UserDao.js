@@ -36,3 +36,10 @@ exports.verifyEmail = function verifyEmail({username, verificationCode}, callbac
        callback(null, result);
      });
 }
+
+exports.query = function query(query, callback) {
+  mysqlTemplate.getConnection().query(query,(err, result) => {
+    if (err) return callback(err);
+    callback(null, result);
+  });
+}
