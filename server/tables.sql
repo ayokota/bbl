@@ -30,7 +30,7 @@ BEGIN
         WHERE u.email = _username and u.password = _password and verification!= ''
 	);
     
-	select @authenticated  as 'authenticated', !@notVerified as verified;
+	select @authenticated  as 'authenticated', @notVerified as notVerified;
 
 END$$
 DELIMITER ;
