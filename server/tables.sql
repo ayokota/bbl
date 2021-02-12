@@ -21,14 +21,16 @@ BEGIN
 	set @authenticated = exists (
 		SELECT *
 		FROM users u
-        WHERE u.email = _username and u.password = _password
+        WHERE u.email = _username and u.password = _password and verification= ''
 	);
     
-	if  @authenticated=1 then
-		select true as 'authenticated';
-	else 
-		select false as  'authenticated';
-   end if;
+    set @notVerified = exists (
+		SELECT *
+		FROM users u
+        WHERE u.email = _username and u.password = _password and verification!= ''
+	);
+    
+	select @authenticated  as 'authenticated', !@notVerified as verified;
 
 END$$
 DELIMITER ;
