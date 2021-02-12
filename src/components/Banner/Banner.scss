@@ -16,6 +16,11 @@
     
     .title{
         display: inline-block;
+        color: black;
+    }
+
+    .title:hover{
+        color: white;
     }
 
     .logout{ 
