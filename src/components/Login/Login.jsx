@@ -19,10 +19,7 @@ class Login extends Component {
         }
     }
 
-
     login() {
-        // this.props.authenticate();
-
         LoginService.login();
         if (LoginService.isLoggedIn()) {
             this.props.setAuthenticationStatus(true);
@@ -98,7 +95,7 @@ class Login extends Component {
                 alert("You have not verified your email yet.")
                 self.setState({needVerification: true})
             } else {
-                self.props.setAuthenticationStatus(true);
+                self.login();
             }
             
           })
