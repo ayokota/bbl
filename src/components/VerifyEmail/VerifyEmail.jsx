@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import "./VerifyEmail.scss"
 import * as AuthApi from "../../apis/authApis";
+import "./VerifyEmail.scss";
 
 
 class VerifyEmail extends Component {
@@ -13,7 +14,7 @@ class VerifyEmail extends Component {
 
     render() {
         return (
-            <div className="email-verification">
+            <div className="component-email-verification">
                 <p>An email has been sent to you, please check your email for the verification code</p>
                 <p>Verification Code</p>
                 <input className="verification-input" value={this.state.verificationCode}

@@ -5,6 +5,8 @@ import "./Login.scss";
 import * as LoginService from "../../services/LoginService.js";
 import * as authAction from "../../redux/action/auth-action.js";
 import { BrowserRouter as Router, Link } from "react-router-dom";
+import * as AuthApis  from "../../apis/authApis.js";
+import VerifyEmail from "../VerifyEmail/VerifyEmail";
 
 class Login extends Component {
     constructor(props) {
@@ -12,7 +14,8 @@ class Login extends Component {
         this.state = {
             username: "",
             password: "",
-            needVerification: false
+            needVerification: false,
+            verified: false
         }
     }
 
@@ -41,8 +44,9 @@ class Login extends Component {
                 </div>
                 <div className="submit-container login-input">
                     <button className="button" onClick={() =>
-                        this.props.authenticate({ username: this.state.username, password: this.state.password })}
-                    >
+                        // this.props.authenticate({ username: this.state.username, password: this.state.password })}
+                        this.authenticate()
+                    }>
                         Login
                         </button>
                     <Link to="/signup">
@@ -56,22 +60,53 @@ class Login extends Component {
     }
 
     render() {
-        if (this.props.authenticated === true) {
+        if (this.props.authenticated === true || this.state.verified === true) {
             return (
                 <Redirect to={"/"} />
             )
         }
-
+ 
         return (
             <div className="component-login container-fluid">
                 {
                     this.state.needVerification === false?
                         this.renderLoginForm()
                         :
-                        this.renderLoginForm()
+                        <div className="verify-email-container">
+                            <VerifyEmail 
+                                username={this.state.username}
+                                postVerification={() => {
+                                    this.setState({verified: true});
+                                    this.props.setAuthenticationStatus(true);
+                                }} />
+                        </div>
                 }
             </div>
         )
+    }
+
+    authenticate() {
+        let self = this;
+        AuthApis.authenticate({ username: this.state.username, password: this.state.password })
+        .then(function (response) {
+            // handle success
+            let resBody = response.data;
+            console.log(resBody);
+            if(resBody.authenticated === 0 && resBody.notVerified === 0) {
+                alert("Incorrect username and/or password. Please try again")
+            } else if(resBody.authenticated === 0 && resBody.notVerified === 1) {
+                alert("You have not verified your email yet.")
+                self.setState({needVerification: true})
+            } else {
+                self.props.setAuthenticationStatus(true);
+            }
+            
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+            alert(error)
+          })
     }
 }
 

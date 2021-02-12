@@ -1,0 +1,18 @@
+.component-email-verification{
+    text-align: center;
+    margin-top: 20px;
+
+    .button-group{
+        margin-top: 10px;
+
+        .verification-input {
+            width: 165px;
+        }
+
+        button, .submit{
+            margin: 10px;
+            border-radius: 10px;
+        }
+    }
+
+}
