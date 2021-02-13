@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import * as AuthApi from "../../apis/authApis";
 import VerifyEmail from "../VerifyEmail/VerifyEmail";
 import "./Signup.scss"
+import {ReactComponent as ShowPasswordIcon} from "../../svgs/password/show.svg";
+import {ReactComponent as HidePasswordIcon} from "../../svgs/password/hide.svg";
 
 class Signup extends Component {
     constructor(props) {
@@ -14,6 +16,8 @@ class Signup extends Component {
         this.state = {
             username: "",
             password: "",
+            repeatPassword: "",
+            showPassword: false,
             firstname: "",
             lastname: "",
             verificationCode: "",
@@ -101,8 +105,30 @@ class Signup extends Component {
                                 <div className="label"> Password </div>
                             </td>
                             <td>
-                                <input type="password" value={this.state.password}
+                                <input type={this.state.showPassword === true ? "text" : "password"} 
+                                    value={this.state.password}
                                     onChange={(e) => this.setState({ password: e.target.value })} />
+                                
+                            </td>
+                            <td>
+                                <label onClick={() => this.setState({showPassword : !this.state.showPassword})}>
+                                    {
+                                        this.state.showPassword === true? 
+                                        <ShowPasswordIcon className="password-icon"/>
+                                        :
+                                        <HidePasswordIcon className="password-icon"/>
+                                    }
+                                </label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div className="label"> Repeat Password </div>
+                            </td>
+                            <td>
+                                <input type={this.state.showPassword === true ? "text" : "password"} 
+                                    value={this.state.repeatPassword}
+                                    onChange={(e) => this.setState({ repeatPassword: e.target.value })} />
                             </td>
                         </tr>
                         <tr>
