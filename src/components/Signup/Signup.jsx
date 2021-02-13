@@ -49,6 +49,9 @@ class Signup extends Component {
         } else if (this.state.lastname === "") {
             alert("Lastname cannot be empty")
             return
+        } else if(this.state.password !== this.state.repeatPassword) {
+            alert("The 2 passwords you have entered do no match")
+            return
         }
 
         let self = this;
