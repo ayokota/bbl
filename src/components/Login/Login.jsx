@@ -51,6 +51,9 @@ class Login extends Component {
                             Sign up
                             </button>
                     </Link>
+                    <button className="button" onClick={() => resetPassword() }>
+                        reset password
+                    </button>
                 </div>
             </div>
         )
@@ -104,6 +107,10 @@ class Login extends Component {
             console.log(error);
             alert(error)
           })
+    }
+
+    resetPassword() {
+        console.log("reset password!");
     }
 }
 
