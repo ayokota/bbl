@@ -156,6 +156,13 @@ class Signup extends Component {
                 </table>
                 <br />
                 <input type="submit" value="Submit" />
+                <Link to="/login">
+                    <button className="back-button"
+                        type="button" 
+                        onClick={(e) => e.stopPropagation() }>
+                            Back
+                    </button>
+                </Link>
             </form>
         )
     }
