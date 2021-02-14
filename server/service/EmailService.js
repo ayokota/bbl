@@ -27,3 +27,20 @@ exports.sendVerificationCode = function sendVerificationCode(email, verification
         }
       });
 }
+
+exports.sendResetPasswordCode = function sendResetPasswordCode(email, uuid) {
+  var mailOptions = {
+      from: 'bolsternetwork.org@gmail.com',
+      to: email,
+      subject: 'Password Reset Code From Bolster Network',
+      html: `<h1>Here is your code for resetting your password:</h1><br/><p><b>${uuid}</b></p>`
+    };
+
+  transporter.sendMail(mailOptions, function(error, info){
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Email sent: ' + info.response);
+      }
+    });
+}

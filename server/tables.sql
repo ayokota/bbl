@@ -6,10 +6,11 @@ CREATE TABLE `users` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(60) NOT NULL,
   `password` VARCHAR(20) NOT NULL,
-   `fname` VARCHAR(20) NULL,
- `lname` VARCHAR(20)  NULL,
+  `fname` VARCHAR(20) NULL,
+  `lname` VARCHAR(20)  NULL,
   `token` VARCHAR(36) NULL,
-  `verification` VARCHAR(36) NULL,
+  `verification` VARCHAR(6) NULL,
+  `reset_code` VARCHAR(36) NULL;
   PRIMARY KEY (`id`, `email`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
@@ -58,7 +59,6 @@ END$$
 DELIMITER ;
 
 DELIMITER $$
-USE `bbl`$$
 CREATE PROCEDURE `email_verification` (IN _username CHAR(60), IN _verification varchar(6))
 BEGIN
 	set @authenticated = exists (
@@ -74,5 +74,11 @@ BEGIN
 		select false as  'exists';
    end if;
 END$$
+
+DELIMITER ;
+
+
+DELIMITER $$
+
 
 DELIMITER ;

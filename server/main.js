@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const UserDao = require('./dao/UserDao.js');
 const randomUtils = require('./utility/RandomUtils.js');
 const emailService = require('./service/EmailService.js');
+const { v4: uuidv4 } = require('uuid');
 
 var cors = require('cors')
 
@@ -125,6 +126,32 @@ app.get('/resendVerificationCode/:email', (req, res) => {
             }
         })
     } catch(err) {
+        res.status(500)
+            .send(err)
+    }
+})
+
+app.get('/forgotPassword/:email', (req, res) => {
+    let params = req.params;
+
+    try {
+        let uuid = uuidv4();
+        emailService.sendResetPasswordCode(params.email, uuid);
+
+        UserDao.query(`UPDATE users set reset_code = '${uuid}' WHERE email = '${params.email}'`, function(err, result) { 
+            if(err == null) {
+                emailService.sendResetPasswordCode(params.email, uuid);
+                res.status(201).send()
+            }
+            else  {
+                res.status(500)
+                .send(err)
+            }
+        })
+
+
+    } catch(err) {
+        console.log(err);
         res.status(500)
             .send(err)
     }
