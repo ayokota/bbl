@@ -55,3 +55,13 @@ export function resendVerificationCode(username) {
         url: process.env.REACT_APP_URL_RESEND_VERIFICATION_CODE+username,
     })
 }
+
+export function sendResetPasswordEmail(username) {
+    return axios.request({
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+        method: 'get',
+        url: process.env.REACT_APP_URL_SEND_RESET_PASSWORD_EMAIL+username,
+    })
+}
