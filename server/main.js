@@ -136,7 +136,6 @@ app.get('/forgotPassword/:email', (req, res) => {
 
     try {
         let uuid = uuidv4();
-        emailService.sendResetPasswordCode(params.email, uuid);
 
         UserDao.query(`UPDATE users set reset_code = '${uuid}' WHERE email = '${params.email}'`, function(err, result) { 
             if(err == null) {

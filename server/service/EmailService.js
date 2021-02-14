@@ -33,7 +33,9 @@ exports.sendResetPasswordCode = function sendResetPasswordCode(email, uuid) {
       from: 'bolsternetwork.org@gmail.com',
       to: email,
       subject: 'Password Reset From Bolster Network',
-      html: `<h1>Here is your link for resetting your password:</h1><br/><p><b>${uuid}</b></p>`
+      html: `<h1>Here is your link to reset your password:</h1><br/>
+
+      <p><b>http://localhost:3001/resetpassword?username=${uuid}&uuid=${uuid}</b></p>`
     };
 
   transporter.sendMail(mailOptions, function(error, info){
