@@ -12,6 +12,7 @@ import Team from "./components/Team/Team";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import ResetPassword from "./components/ResetPassword/ResetPassword";
 import * as LoginService from "./services/LoginService.js";
 import * as authAction from "./redux/action/auth-action.js";
 
@@ -37,6 +38,7 @@ class App extends Component {
               <Route path={"/login"} exact component={Login} />
               <Route path={"/signup"} exact component={Signup} />
               <Route path={"/forgotPassword"} exact component={ForgotPassword} />
+              <Route path={"/resetPassword"} component={ResetPassword} />
             </div>
             <Footer />
           </div>
