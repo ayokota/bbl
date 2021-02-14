@@ -24,7 +24,8 @@ class HomePage extends Component {
                 {this.props.authenticated === true ? 
                     <div className="logout" onClick={() => this.logout()}>Logout</div> 
                     : 
-                    <Redirect to={"/login"} />
+                    // <Redirect to={"/login"} />
+                    null
                 }
             </div>
         )
