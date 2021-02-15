@@ -43,3 +43,11 @@ exports.query = function query(query, callback) {
     callback(null, result);
   });
 }
+
+exports.updatePassword = function updatePassword({uuid, password}, callback) {
+  var sql="call update_password(?, ?);"
+  mysqlTemplate.getConnection().query(sql, [uuid, password],(err, result) => {
+    if (err) return callback(err);
+    callback(null, result);
+  });
+}

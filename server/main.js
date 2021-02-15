@@ -156,6 +156,34 @@ app.get('/forgotPassword/:email', (req, res) => {
     }
 })
 
+app.post('/updatePassword', (req, res) => {
+    let body = req.body;
+
+    try {
+        let uuid = body.uuid
+        let password = body.password
+
+        if(uuid === "") {
+            res.status(500)
+                    .send("uuid cannot be empty")
+        }
+
+        UserDao.updatePassword({uuid: uuid, password: password},
+            function(err, result) {
+                if(err == null)
+                    res.send(result[0][0])
+                else  {
+                    res.status(500)
+                    .send(err)
+                }
+            })
+    } catch(err) {
+        console.log(err);
+        res.status(500)
+            .send(err)
+    }
+})
+
 app.get('/ping', (req, res) => {
     res.send("OK")
 

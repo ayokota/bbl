@@ -65,3 +65,17 @@ export function sendResetPasswordEmail(username) {
         url: process.env.REACT_APP_URL_SEND_RESET_PASSWORD_EMAIL+username,
     })
 }
+
+export function resetPassword({uuid, password}) {
+    return axios.request({
+        headers: {
+            'Access-Control-Allow-Origin': '*',
+          },
+        method: 'post',
+        url: process.env.REACT_APP_URL_RESET_PASSWORD,
+        data: {
+            "uuid": uuid,
+            "password": password
+        }
+    })
+}

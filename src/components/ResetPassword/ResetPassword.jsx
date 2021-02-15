@@ -3,6 +3,7 @@ import "./ResetPassword.scss";
 import {ReactComponent as ShowPasswordIcon} from "../../svgs/password/show.svg";
 import {ReactComponent as HidePasswordIcon} from "../../svgs/password/hide.svg";
 import { useLocation, withRouter } from "react-router-dom";
+import * as AuthApi from "../../apis/authApis";
 
 class ResetPassword extends Component {
     constructor(props) {
@@ -23,13 +24,25 @@ class ResetPassword extends Component {
 
         let urlParam =  new URLSearchParams(this.props.location.search);
         let uuid = urlParam.get('uuid');
-        
-        console.log(uuid);
+
+        AuthApi.resetPassword({
+            uuid: uuid,
+            password: this.state.password
+        }).then(function (response) {
+            // handle success
+            let resBody = response.data;
+            console.log(resBody);
+           
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+            alert(error)
+          })
 
     }
 
     render() {
-        console.log("Here");
         return (
             <div className="component-reset-password container-fluid">
                 <p> Reset your password here </p>

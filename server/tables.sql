@@ -79,6 +79,19 @@ DELIMITER ;
 
 
 DELIMITER $$
-
-
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_password`(IN _reset_code CHAR(60), IN _password varchar(20))
+BEGIN
+	set @validCode = exists (
+		SELECT *
+		FROM users u
+        WHERE u.reset_code = _reset_code and u.reset_code != ''
+	);
+    
+	if  @validCode=1 then
+		update users set reset_code = '' , password = _password  WHERE reset_code = _reset_code;
+		select true as 'updated', false as 'match';
+	else 
+		select false as 'updated', false as 'match';
+   end if;
+END
 DELIMITER ;
