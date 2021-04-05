@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require("body-parser");
 const UserDao = require('./dao/UserDao.js');
-const randomUtils = require('./utility/RandomUtils.js');
+const randomUtils = require('./utility/randomUtils.js');
 const emailService = require('./service/EmailService.js');
 const { v4: uuidv4 } = require('uuid');
 

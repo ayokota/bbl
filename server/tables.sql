@@ -10,7 +10,7 @@ CREATE TABLE `users` (
   `lname` VARCHAR(20)  NULL,
   `token` VARCHAR(36) NULL,
   `verification` VARCHAR(6) NULL,
-  `reset_code` VARCHAR(36) NULL;
+  `reset_code` VARCHAR(36) NULL,
   PRIMARY KEY (`id`, `email`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE);
@@ -79,7 +79,7 @@ DELIMITER ;
 
 
 DELIMITER $$
-CREATE DEFINER=`root`@`localhost` PROCEDURE `update_password`(IN _reset_code CHAR(60), IN _password varchar(20))
+CREATE PROCEDURE `update_password`(IN _reset_code CHAR(60), IN _password varchar(20))
 BEGIN
 	set @validCode = exists (
 		SELECT *
@@ -93,5 +93,5 @@ BEGIN
 	else 
 		select false as 'updated', false as 'match';
    end if;
-END
+END$$
 DELIMITER ;
